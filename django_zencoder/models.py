@@ -1,6 +1,7 @@
 import os.path
 from django.conf import settings
 from django.core.files.uploadedfile import UploadedFile
+from django.core.files import File
 from django.db import models
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
