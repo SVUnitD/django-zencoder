@@ -40,12 +40,16 @@ class Format(models.Model):
 
 def detect_file_changes(sender, instance, **kwargs):
     field = ZENCODER_MODELS.get('%s.%s' % (sender._meta.app_label, sender._meta.model_name))
-    if field and hasattr(getattr(instance, field), 'file') and isinstance(
-            getattr(instance, field).file, UploadedFile):
+    file_type_match = False
+    if field:
+        file_type_match = (isinstance(getattr(instance, field).file, UploadedFile) or isinstance(getattr(instance, field).file, File))
+
+    if field and hasattr(getattr(instance, field), 'file') and file_type_match:
         if hasattr(instance, '_zencoder_updates'):
             instance._zencoder_updates.append(field)
         else:
             instance._zencoder_updates = [field]
+
 
 
 def trigger_encoding(sender, instance, **kwargs):
