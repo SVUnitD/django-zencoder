@@ -47,7 +47,13 @@ def open_url(url, data=None):
 
 def send_request(data):
     data['api_key'] = settings.ZENCODER_API_KEY
-    response = open_url('https://app.zencoder.com/api/v2/jobs', data)
+    try:
+        api_url = settings.ZENCODER_API_KURL
+    except:
+        raise Exception("ZENCODER_API_KURL not dound in settings")
+
+    response = open_url(api_url, data)
+    #response = open_url('https://app.zencoder.com/api/v2/jobs', data)
     return json.loads(response.read())
 
 
