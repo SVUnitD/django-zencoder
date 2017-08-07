@@ -48,9 +48,9 @@ def open_url(url, data=None):
 def send_request(data):
     data['api_key'] = settings.ZENCODER_API_KEY
     try:
-        api_url = settings.ZENCODER_API_KURL
+        api_url = settings.ZENCODER_API_URL
     except:
-        raise Exception("ZENCODER_API_KURL not dound in settings")
+        raise Exception("ZENCODER_API_URL not found in settings")
 
     response = open_url(api_url, data)
     #response = open_url('https://app.zencoder.com/api/v2/jobs', data)
