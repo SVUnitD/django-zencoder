@@ -44,6 +44,7 @@ def open_url(url, data=None):
         except ValueError:
             raise ZencoderError(response.reason or 'HTTP error: %d' % response.status)
 
+    print response.read()
     return response
 
 
