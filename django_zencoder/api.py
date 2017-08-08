@@ -23,14 +23,14 @@ logger = logging.getLogger(__name__)
 
 def open_url(url, data=None):
     if data:
-        print("data: %s" % data)
+        print("zencoder data: %s" % data)
         headers = {
             "Content-type": "application/json",
             "Accept": "application/json",
         }
         request = Request(url, data=json.dumps(data), headers=headers)
     else:
-        print("no data:")
+        print("zencoder no data")
         request = Request(url)
 
     try:
@@ -44,7 +44,7 @@ def open_url(url, data=None):
         except ValueError:
             raise ZencoderError(response.reason or 'HTTP error: %d' % response.status)
 
-    print response.read()
+    print("zencoder response %s" % response.read())
     return response
 
 
