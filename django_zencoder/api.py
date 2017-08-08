@@ -38,13 +38,13 @@ def open_url(url, data=None):
     except URLError as e:
         raise ZencoderError(e.reason)
 
+    print("zencoder response %s" % response.read())
     if response.getcode() // 100 != 2:
         try:
             raise ZencoderError(', '.join(json.loads(response.text)['errors']))
         except ValueError:
             raise ZencoderError(response.reason or 'HTTP error: %d' % response.status)
 
-    print("zencoder response %s" % response.read())
     return response
 
 
