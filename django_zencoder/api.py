@@ -23,12 +23,14 @@ logger = logging.getLogger(__name__)
 
 def open_url(url, data=None):
     if data:
+        print("data: %s" % data)
         headers = {
             "Content-type": "application/json",
             "Accept": "application/json",
         }
         request = Request(url, data=json.dumps(data), headers=headers)
     else:
+        print("no data:")
         request = Request(url)
 
     try:
