@@ -18,19 +18,19 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .errors import ZencoderError
 
+data = "{'test': True, 'input': 'https://int.media.mobile.gt.mercedes-benz.com/videos/direct/de/2017/08/small_AH0HAQM.mp4', 'region': 'europe', 'api_key': u'eePh3Ohsh2ao5vei6waiv2ohchae2iu4', 'output': [{'video_codec': u'h264', 'height': None, 'width': None, 'notifications': [u'https://int.mobile.gt.mercedes-benz.com/api/zencoder/notify/?eyJvYmoiOjE0NjE3LCJmbGQiOiJ2aWRlb19maWxlIiwiY3QiOjE1fQ:1df6oX:BEzOuWF3xH1cik9d_4Ho87CkzrU'], 'label': u'mp4-high'}, {'video_codec': u'h264', 'height': 480, 'width': 640, 'notifications': [u'https://int.mobile.gt.mercedes-benz.com/api/zencoder/notify/?eyJvYmoiOjE0NjE3LCJmbGQiOiJ2aWRlb19maWxlIiwiY3QiOjE1fQ:1df6oX:BEzOuWF3xH1cik9d_4Ho87CkzrU'], 'label': u'mp4-low'}]}"
+
 logger = logging.getLogger(__name__)
 
 
 def open_url(url, data=None):
     if data:
-        print("zencoder data: %s" % data)
         headers = {
             "Content-type": "application/json",
             "Accept": "application/json",
         }
         request = Request(url, data=json.dumps(data), headers=headers)
     else:
-        print("zencoder no data")
         request = Request(url)
 
     try:
@@ -38,7 +38,6 @@ def open_url(url, data=None):
     except URLError as e:
         raise ZencoderError(e.reason)
 
-    print("zencoder response %s" % response.read())
     if response.getcode() // 100 != 2:
         try:
             raise ZencoderError(', '.join(json.loads(response.text)['errors']))
