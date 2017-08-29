@@ -18,8 +18,6 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .errors import ZencoderError
 
-data = "{'test': True, 'input': 'https://int.media.mobile.gt.mercedes-benz.com/videos/direct/de/2017/08/small_AH0HAQM.mp4', 'region': 'europe', 'api_key': u'eePh3Ohsh2ao5vei6waiv2ohchae2iu4', 'output': [{'video_codec': u'h264', 'height': None, 'width': None, 'notifications': [u'https://int.mobile.gt.mercedes-benz.com/api/zencoder/notify/?eyJvYmoiOjE0NjE3LCJmbGQiOiJ2aWRlb19maWxlIiwiY3QiOjE1fQ:1df6oX:BEzOuWF3xH1cik9d_4Ho87CkzrU'], 'label': u'mp4-high'}, {'video_codec': u'h264', 'height': 480, 'width': 640, 'notifications': [u'https://int.mobile.gt.mercedes-benz.com/api/zencoder/notify/?eyJvYmoiOjE0NjE3LCJmbGQiOiJ2aWRlb19maWxlIiwiY3QiOjE1fQ:1df6oX:BEzOuWF3xH1cik9d_4Ho87CkzrU'], 'label': u'mp4-low'}]}"
-
 logger = logging.getLogger(__name__)
 
 
