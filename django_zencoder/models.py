@@ -43,9 +43,12 @@ def detect_file_changes(sender, instance, **kwargs):
     field = ZENCODER_MODELS.get('%s.%s' % (sender._meta.app_label, sender._meta.model_name))
     file_type_match = False
     if field:
-        file_type_match = (isinstance(getattr(instance, field).file, UploadedFile) or isinstance(getattr(instance, field).file, File))
-
-    if field and hasattr(getattr(instance, field), 'file') and file_type_match:
+        try:
+            file_type_match = (isinstance(getattr(instance, field).file, UploadedFile) or isinstance(getattr(instance, field).file, File))
+        except ValueError:
+            pass
+            
+    if field and file_type_match and hasattr(getattr(instance, field), 'file'):
         if hasattr(instance, '_zencoder_updates'):
             instance._zencoder_updates.append(field)
         else:
