@@ -53,7 +53,7 @@ def send_request(data):
         raise Exception("ZENCODER_API_URL not found in settings")
 
     response = open_url(api_url, data)
-    #response = open_url('https://app.zencoder.com/api/v2/jobs', data)
+    # response = open_url('https://app.zencoder.com/api/v2/jobs', data)
     return json.loads(response.read().decode('utf-8'))
 
 
@@ -113,7 +113,7 @@ def get_video(content_type_id, object_id, field_name, data):
     content_type = ContentType.objects.get(id=content_type_id)
     logger.info('Getting video file for %s/%s/%s', content_type, object_id, field_name)
 
-    output = json.loads(data)['output']
+    output = json.loads(data.decode('utf-8'))['output']
 
     try:
         content_type.get_object_for_this_type(pk=object_id)
