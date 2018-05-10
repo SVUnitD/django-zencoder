@@ -47,6 +47,8 @@ def detect_file_changes(sender, instance, **kwargs):
             file_type_match = (isinstance(getattr(instance, field).file, UploadedFile) or isinstance(getattr(instance, field).file, File))
         except ValueError:
             pass
+        except FileNotFoundError:
+            pass
             
     if field and file_type_match and hasattr(getattr(instance, field), 'file'):
         if hasattr(instance, '_zencoder_updates'):
