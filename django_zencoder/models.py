@@ -57,7 +57,6 @@ def detect_file_changes(sender, instance, **kwargs):
             instance._zencoder_updates = [field]
 
 
-
 def trigger_encoding(sender, instance, **kwargs):
     for field in getattr(instance, '_zencoder_updates', ()):
         encode(instance, field)
@@ -68,4 +67,6 @@ if getattr(settings, 'ZENCODER_MODELS', None):
         app_model, field = name.rsplit('.', 1)
         ZENCODER_MODELS[app_model.lower()] = field
     models.signals.pre_save.connect(detect_file_changes)
-    models.signals.post_save.connect(trigger_encoding)
+
+    if not getattr(settings, 'ZENCODER_DISABLE_ENCODING', False):
+        models.signals.post_save.connect(trigger_encoding)
